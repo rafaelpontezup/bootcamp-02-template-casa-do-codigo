@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  casadocodigo-svc:
+    build:
+      context: .
+    image: casa-do-codigo:1.0.0
+    container_name: casadocodigo-svc
+    environment:
+      - DB_URL=jdbc:postgresql://postgres-db/casadocodigo
+      - DB_USERNAME=casadocodigo
+      - DB_PASSWORD=Y2FzYWRvY29kaWdvCg
+    ports:
+      - "8080:8080"
+    networks:
+      - dkrnet
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    image: postgres:9.6.3
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=casadocodigo
+      - POSTGRES_PASSWORD=Y2FzYWRvY29kaWdvCg
+      - POSTGRES_DB=casadocodigo
+    ports:
+      - "5432:5432"
+    networks:
+      - dkrnet
+
+networks:
+  dkrnet:
+    driver: bridge

@@ -1,8 +1,8 @@
 # Casa do codigo
 
 ## Run
-Build and run the project executing following command:
+Building and running with Docker Compose locally
 ```
-$> ./mvnw spring-boot:run
+$> docker-compose up --build
 ```
 
