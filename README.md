@@ -36,3 +36,17 @@ Date: Wed, 18 Nov 2020 09:11:57 GMT
 
 {"id":1,"name":"Computers & Technology"}
 ``` 
+
+- Create a new book:
+```
+$> curl localhost:8080/books -i -XPOST \
+  -H 'Content-Type: application/json' \
+  -d '{"title":"Programming Kotlin","abstract":"Lorem ipsum dolor sit amet.","summary":"Cras quis cursus magna. Duis pretium placerat libero, id feugiat.","price":39.74,"pages":462,"isbn":"978-1680506358","publishedAt":"2021-10-01","categoryId":1,"authorId":1}'
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 18 Nov 2020 22:44:58 GMT
+
+{"id":1,"title":"Programming Kotlin","abstract":"Lorem ipsum dolor sit amet.","summary":"Cras quis cursus magna. Duis pretium placerat libero, id feugiat.","price":39.74,"pages":462,"isbn":"978-1680506358","publishedAt":"2021-10-01","category":{"id":1,"name":"Computers & Technology"},"author":{"id":1,"name":"Venkat Subramaniam","email":"venkats@agiledeveloper.com","description":"Venkat Subramaniam is an award-winning author.","createdAt":"2020-11-18T22:44:30.693565Z"}}
+``` 
