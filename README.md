@@ -75,3 +75,16 @@ Date: Thu, 19 Nov 2020 00:52:33 GMT
 {"title":"Programming Kotlin","abstract":"Lorem ipsum dolor sit amet.","summary":"Cras quis cursus magna. Duis pretium placerat libero, id feugiat.","price":39.74,"pages":462,"isbn":"978-1680506358","publishedAt":"2021-10-01","author":{"name":"Venkat Subramaniam","description":"Venkat Subramaniam is an award-winning author."}}
 ``` 
 
+- Create a new country:
+```
+$> curl localhost:8080/countries -i -XPOST \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"USA"}'
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 19 Nov 2020 03:23:10 GMT
+
+{"id":1,"name":"USA"}
+``` 
