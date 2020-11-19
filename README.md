@@ -88,3 +88,17 @@ Date: Thu, 19 Nov 2020 03:23:10 GMT
 
 {"id":1,"name":"USA"}
 ``` 
+
+- Create a new state that belongs to an existing country:
+```
+$> curl localhost:8080/states -i -XPOST \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"Texas","countryId":1}'
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 19 Nov 2020 03:44:49 GMT
+
+{"id":1,"name":"Texas","country":{"id":1,"name":"USA"}}
+``` 
