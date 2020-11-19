@@ -1,6 +1,7 @@
 package br.com.zup.casadocodigo.book
 
 import br.com.zup.casadocodigo.author.Author
+import br.com.zup.casadocodigo.book.Book.Companion.FIND_ALL
 import br.com.zup.casadocodigo.category.Category
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -13,6 +14,7 @@ import javax.validation.constraints.*
     UniqueConstraint(columnNames = ["title"], name = "uk_book_title"),
     UniqueConstraint(columnNames = ["isbn"], name = "uk_book_isbn")
 ])
+@NamedQueries(NamedQuery(name = FIND_ALL, query = "select b from Book b"))
 data class Book(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,4 +53,8 @@ data class Book(
         @Valid
         @ManyToOne
         val author: Author
-)
+) {
+    companion object {
+        const val FIND_ALL: String = "Book.findAll"
+    }
+}
