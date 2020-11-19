@@ -63,3 +63,15 @@ Date: Thu, 19 Nov 2020 00:48:18 GMT
 [{"id":1,"title":"Programming Kotlin"}]
 ``` 
 
+- Display a book's detail page:
+```
+$> curl localhost:8080/books/1 -i
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 19 Nov 2020 00:52:33 GMT
+
+{"title":"Programming Kotlin","abstract":"Lorem ipsum dolor sit amet.","summary":"Cras quis cursus magna. Duis pretium placerat libero, id feugiat.","price":39.74,"pages":462,"isbn":"978-1680506358","publishedAt":"2021-10-01","author":{"name":"Venkat Subramaniam","description":"Venkat Subramaniam is an award-winning author."}}
+``` 
+

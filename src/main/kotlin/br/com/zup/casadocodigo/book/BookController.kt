@@ -1,15 +1,15 @@
 package br.com.zup.casadocodigo.book
 
 import br.com.zup.casadocodigo.book.Book.Companion.FIND_ALL
+import br.com.zup.casadocodigo.shared.validation.Exists
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.*
 import javax.persistence.EntityManager
 import javax.transaction.Transactional
 import javax.validation.Valid
 
+@Validated
 @RestController
 class BookController(val entityManager: EntityManager) {
 
@@ -29,6 +29,14 @@ class BookController(val entityManager: EntityManager) {
                 .createNamedQuery(FIND_ALL, Book::class.java)
                 .resultList
         return ResponseEntity.ok(BookListResponse.of(books))
+    }
+
+    @GetMapping("/books/{id}")
+    fun retrieve(
+            @Exists(entityClass = Book::class) @PathVariable id: Long
+    ): ResponseEntity<BookDetailResponse> {
+        val book = entityManager.find(Book::class.java, id)
+        return ResponseEntity.ok(BookDetailResponse(book))
     }
 
 }
