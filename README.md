@@ -102,3 +102,16 @@ Date: Thu, 19 Nov 2020 03:44:49 GMT
 
 {"id":1,"name":"Texas","country":{"id":1,"name":"USA"}}
 ``` 
+
+- Starting a new payment flow:
+```
+$> curl localhost:8080/purchases -i -XPOST \
+  -H 'Content-Type: application/json' \
+  -d '{"email":"john.doe@email.com","name":"John","surname":"Doe","document":"042.432.604-35","address":"123 Fake St.","complement":"Apt 23","city":"Houston","countryId":1,"stateId":1,"phone":"(98) 3954-2633","cep":"65072-872","order":{"amount":39.74,"items":[{"bookId":1,"quantity":1}]}}'
+
+HTTP/1.1 201
+Location: http://localhost:8080/purchases/1
+Content-Length: 0
+Date: Fri, 20 Nov 2020 18:51:23 GMT
+
+``` 
