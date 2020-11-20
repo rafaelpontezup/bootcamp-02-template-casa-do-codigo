@@ -103,6 +103,20 @@ Date: Thu, 19 Nov 2020 03:44:49 GMT
 {"id":1,"name":"Texas","country":{"id":1,"name":"USA"}}
 ``` 
 
+- Create a new coupon:
+```
+$> curl localhost:8080/coupons -i -XPOST \
+  -H 'Content-Type: application/json' \
+  -d '{"code":"DkNXLkBt","discount":0.25,"validUntil":"2021-10-05"}'
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 20 Nov 2020 19:34:26 GMT
+
+{"id":1,"code":"DkNXLkBt","discount":0.25,"validUntil":"2021-10-05"}
+``` 
+
 - Starting a new payment flow:
 ```
 $> curl localhost:8080/purchases -i -XPOST \
