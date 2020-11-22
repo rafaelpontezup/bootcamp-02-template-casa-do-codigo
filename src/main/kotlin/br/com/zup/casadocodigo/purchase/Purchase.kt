@@ -62,6 +62,9 @@ class Purchase(
         @ElementCollection
         val items: Set<LineItem> = hashSetOf(),
 
+        @Embedded
+        val couponApplied: CouponApplied? = null,
+
         @Enumerated(EnumType.STRING)
         val status: Status = Status.DEFERRED
 )

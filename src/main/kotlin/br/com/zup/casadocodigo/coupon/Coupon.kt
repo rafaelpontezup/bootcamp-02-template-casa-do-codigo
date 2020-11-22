@@ -1,5 +1,6 @@
 package br.com.zup.casadocodigo.coupon
 
+import br.com.zup.casadocodigo.coupon.Coupon.Companion.FIND_BY_CODE
 import java.math.BigDecimal
 import java.time.LocalDate
 import javax.persistence.*
@@ -12,6 +13,7 @@ import javax.validation.constraints.Positive
 @Table(name = "coupons", uniqueConstraints = [
     UniqueConstraint(columnNames = ["code"], name = "uk_coupon_code")
 ])
+@NamedQueries(NamedQuery(name = FIND_BY_CODE, query = "select c from Coupon c where c.code = :code"))
 data class Coupon(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +31,8 @@ data class Coupon(
         val validUntil: LocalDate
 ) {
     fun isValid() = LocalDate.now() <= validUntil;
+
+    companion object {
+        const val FIND_BY_CODE: String = "Coupon.findByCode"
+    }
 }

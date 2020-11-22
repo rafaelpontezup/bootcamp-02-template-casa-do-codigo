@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidator
 import javax.validation.ConstraintValidatorContext
 import kotlin.reflect.KClass
 
-class ExistsValidator(private val entityManager: EntityManager) : ConstraintValidator<Exists, Long?> {
+class ExistsValidator(private val entityManager: EntityManager) : ConstraintValidator<Exists, Any?> {
     private lateinit var entityClass: KClass<*>
     private lateinit var entityField: String
 
@@ -19,7 +19,7 @@ class ExistsValidator(private val entityManager: EntityManager) : ConstraintVali
         entityField = constraint.entityField
     }
 
-    override fun isValid(value: Long?, context: ConstraintValidatorContext): Boolean {
+    override fun isValid(value: Any?, context: ConstraintValidatorContext): Boolean {
         if (value == null) {
             return true
         }

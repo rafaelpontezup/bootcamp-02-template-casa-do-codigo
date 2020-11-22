@@ -1,6 +1,8 @@
 package br.com.zup.casadocodigo.purchase
 
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.WebDataBinder
+import org.springframework.web.bind.annotation.InitBinder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -11,6 +13,11 @@ import javax.validation.Valid
 
 @RestController
 class PurchaseController(val entityManager: EntityManager) {
+
+    @InitBinder
+    fun initBinder(binder: WebDataBinder) {
+        binder.addValidators(CouponValidator(entityManager))
+    }
 
     @Transactional
     @PostMapping("/purchases")
