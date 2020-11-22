@@ -21,7 +21,7 @@ class MatchPriceValidator(
         }
 
         val total = value.toModel(entityManager)
-                .map(LineItem::total)
+                .map(LineItem::amount)
                 .fold(BigDecimal.ZERO, BigDecimal::add)
 
         return value.amount.compareTo(total) == 0

@@ -1,16 +1,16 @@
 package br.com.zup.casadocodigo.purchase
 
+import br.com.zup.casadocodigo.shared.validation.Exists
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.WebDataBinder
-import org.springframework.web.bind.annotation.InitBinder
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import javax.persistence.EntityManager
 import javax.transaction.Transactional
 import javax.validation.Valid
 
+@Validated
 @RestController
 class PurchaseController(val entityManager: EntityManager) {
 
@@ -32,6 +32,14 @@ class PurchaseController(val entityManager: EntityManager) {
                 .path("/purchases/${purchase.id}")
                 .build().toUri()
         return ResponseEntity.created(uri).build()
+    }
+
+    @GetMapping("/purchases/{id}")
+    fun retrieve(
+            @Exists(entityClass = Purchase::class) @PathVariable id: Long
+    ): ResponseEntity<PurchaseResponse> {
+        val purchase = entityManager.find(Purchase::class.java, id)
+        return ResponseEntity.ok(PurchaseResponse(purchase))
     }
 
 }

@@ -129,3 +129,16 @@ Content-Length: 0
 Date: Fri, 20 Nov 2020 18:51:23 GMT
 
 ``` 
+
+- Display purchase's detail page:
+```
+$> curl localhost:8080/purchases/1 -i
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 23 Nov 2020 22:17:25 GMT
+
+{"id":1,"email":"john.doe@email.com","name":"John","surname":"Doe","document":"042.432.604-35","address":"123 Fake St.","complement":"Apt 23","city":"Houston","country":"USA","state":"Texas","phone":"(98) 3954-2633","cep":"65072-872","items":[{"bookTitle":"Programming Kotlin","quantity":1,"price":39.74,"amount":39.74}],"existsCoupon":true,"discount":9.94,"netAmount":29.80,"status":"DEFERRED"}
+``` 
+

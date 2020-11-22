@@ -4,6 +4,8 @@ import br.com.zup.casadocodigo.country.Country
 import br.com.zup.casadocodigo.shared.validation.CEP
 import br.com.zup.casadocodigo.shared.validation.Document
 import br.com.zup.casadocodigo.state.State
+import java.math.BigDecimal
+import java.math.RoundingMode.CEILING
 import javax.persistence.*
 import javax.validation.Valid
 import javax.validation.constraints.Email
@@ -67,4 +69,10 @@ class Purchase(
 
         @Enumerated(EnumType.STRING)
         val status: Status = Status.DEFERRED
-)
+) {
+    private fun grossAmount(): BigDecimal = items.map(LineItem::amount).fold(BigDecimal.ZERO, BigDecimal::add)
+
+    fun discount(): BigDecimal? = couponApplied?.discount?.multiply(grossAmount())?.setScale(2, CEILING) ?: BigDecimal.ZERO
+
+    fun netAmount(): BigDecimal = grossAmount().subtract(discount()).setScale(2, CEILING)
+}

@@ -23,5 +23,5 @@ class LineItem private constructor(
 ) {
     constructor(book: Book, quantity: Int) : this(book, quantity, book.price)
 
-    fun total(): BigDecimal = price.multiply(BigDecimal(quantity))
+    fun amount(): BigDecimal = price.multiply(BigDecimal(quantity))
 }
